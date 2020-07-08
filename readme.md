@@ -2,6 +2,10 @@
 
 **primer-js** is a tiny (474 bytes minified + gzipped) library for creating normalised, unit independent timelines, for use in programatic animation.
 
+## API
+
+[See docs.](./docs.md)
+
 ## Example
 
 ```javascript
