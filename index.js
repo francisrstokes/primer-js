@@ -1,10 +1,17 @@
 const linear = t => t;
+
+/**
+ * @typedef PrimerEvent
+ * @type {TimelineEvent|ParallelTimelineEvent}
+ */
+
+
 /**
  * Top level timeline class
  */
 class Timeline {
   /**
-   * @param {TimelineEvent|ParallelTimelineEvent} events
+   * @param {PrimerEvent[]} events
    */
   constructor(events) {
     this.events = events;
@@ -43,7 +50,7 @@ class Timeline {
   }
 
   /**
-   * Get a named TimelineEvent object
+   * Get a named {@link PrimerEvent} object
    * @param {string} event 
    */
   get(event) {
@@ -64,7 +71,7 @@ class BaseTimelineEvent {
 class TimelineEvent extends BaseTimelineEvent {
   /**
    * @param {string} name Name of this event (used in {@link Timeline#get})
-   * @param {number} properties
+   * @param {object} properties
    * @param {number} [properties.duration=0] Active duration of the event
    * @param {number} [properties.preWait=0] Time to wait before entering the active duration
    * @param {number} [properties.postWait=0] Time to wait before finalising the event
@@ -107,14 +114,14 @@ class TimelineEvent extends BaseTimelineEvent {
 }
 
 /**
- * The ParallelTimelineEvent class allows you to group child events, where all events
+ * The ParallelTimelineEvent class allows you to group {@link PrimerEvent}s, where all events
  * run in parallel, and the group itself has a duration equal to the longest duration of
  * all the children
  */
 class ParallelTimelineEvent extends BaseTimelineEvent {
   /**
    * @param {string} name 
-   * @param {TimelineEvent|ParallelTimelineEvent} events 
+   * @param {PrimerEvent[]} events 
    */
   constructor(name, events) {
     super(name);
@@ -142,7 +149,7 @@ class ParallelTimelineEvent extends BaseTimelineEvent {
   }
 
   /**
-   * Get a named TimelineEvent object in this group
+   * Get a named {@link PrimerEvent} object in this group
    * @param {string} event 
    */
   get(event) {
@@ -158,8 +165,8 @@ class ParallelTimelineEvent extends BaseTimelineEvent {
 }
 
 /**
- * Factory function for the {@Link Timeline} constructor
- * @param {TimelineEvent|ParallelTimelineEvent} events
+ * Factory function for the {@link Timeline} constructor
+ * @param {PrimerEvent[]} events
  * @returns {Timeline}
  */
 function timeline(events) {
@@ -167,10 +174,10 @@ function timeline(events) {
 }
 
 /**
- * Factory function for the {@Link TimelineEvent} constructor
+ * Factory function for the {@link TimelineEvent} constructor
  *
  * @param {string} name Name of this event (used in {@link Timeline#get})
- * @param {number} properties
+ * @param {object} properties
  * @param {number} [properties.duration=0] Active duration of the event
  * @param {number} [properties.preWait=0] Time to wait before entering the active duration
  * @param {number} [properties.postWait=0] Time to wait before finalising the event
@@ -183,9 +190,9 @@ function timelineEvent(name, properties) {
 }
 
 /**
- * Factory function for the {@Link ParallelTimelineEvent} constructor
+ * Factory function for the {@link ParallelTimelineEvent} constructor
  * @param {string} name 
- * @param {TimelineEvent|ParallelTimelineEvent} events 
+ * @param {PrimerEvent[]} events 
  * @returns {ParallelTimelineEvent}
  */
 function parallelTimelineEvent(name, events) {

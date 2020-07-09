@@ -18,8 +18,8 @@ const tl = timeline([
   // event "b" lasts for 300 time units, but is delayed by 200
   timelineEvent("b", { duration: 300, preWait: 200 }),
 
-  // event "c" last for 200 time units, and uses a custom expoential easing function
-  timelineEvent("c", { duration: 200, ease: x => x**2 }),
+  // event "c" lasts for 200 time units, and uses a custom expoential easing function
+  timelineEvent("c", { duration: 200, ease: t => t**2 }),
 ]);
 
 // Begin the timeline at t=0

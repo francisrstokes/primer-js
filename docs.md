@@ -1,4 +1,4 @@
-## Classes 
+## Classes
 
 <dl>
 <dt><a href="#Timeline">Timeline</a></dt>
@@ -8,7 +8,7 @@
 <dd><p>Basic Timeline Event</p>
 </dd>
 <dt><a href="#ParallelTimelineEvent">ParallelTimelineEvent</a></dt>
-<dd><p>The ParallelTimelineEvent class allows you to group child events, where all events
+<dd><p>The ParallelTimelineEvent class allows you to group <a href="#PrimerEvent">PrimerEvent</a>s, where all events
 run in parallel, and the group itself has a duration equal to the longest duration of
 all the children</p>
 </dd>
@@ -18,14 +18,21 @@ all the children</p>
 
 <dl>
 <dt><a href="#timeline">timeline(events)</a> ⇒ <code><a href="#Timeline">Timeline</a></code></dt>
-<dd><p>Factory function for the {@Link Timeline} constructor</p>
+<dd><p>Factory function for the <a href="#Timeline">Timeline</a> constructor</p>
 </dd>
 <dt><a href="#timelineEvent">timelineEvent(name, properties)</a> ⇒ <code><a href="#TimelineEvent">TimelineEvent</a></code></dt>
-<dd><p>Factory function for the {@Link TimelineEvent} constructor</p>
+<dd><p>Factory function for the <a href="#TimelineEvent">TimelineEvent</a> constructor</p>
 </dd>
 <dt><a href="#parallelTimelineEvent">parallelTimelineEvent(name, events)</a> ⇒ <code><a href="#ParallelTimelineEvent">ParallelTimelineEvent</a></code></dt>
-<dd><p>Factory function for the {@Link ParallelTimelineEvent} constructor</p>
+<dd><p>Factory function for the <a href="#ParallelTimelineEvent">ParallelTimelineEvent</a> constructor</p>
 </dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#PrimerEvent">PrimerEvent</a> : <code><a href="#TimelineEvent">TimelineEvent</a></code> | <code><a href="#ParallelTimelineEvent">ParallelTimelineEvent</a></code></dt>
+<dd></dd>
 </dl>
 
 <a name="Timeline"></a>
@@ -47,7 +54,7 @@ Top level timeline class
 
 | Param | Type |
 | --- | --- |
-| events | [<code>TimelineEvent</code>](#TimelineEvent) \| [<code>ParallelTimelineEvent</code>](#ParallelTimelineEvent) | 
+| events | [<code>Array.&lt;PrimerEvent&gt;</code>](#PrimerEvent) | 
 
 <a name="Timeline+init"></a>
 
@@ -74,7 +81,7 @@ Update the timeline
 <a name="Timeline+get"></a>
 
 ### timeline.get(event)
-Get a named TimelineEvent object
+Get a named [PrimerEvent](#PrimerEvent) object
 
 **Kind**: instance method of [<code>Timeline</code>](#Timeline)  
 
@@ -100,7 +107,7 @@ Basic Timeline Event
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | name | <code>string</code> |  | Name of this event (used in [get](#Timeline+get)) |
-| properties | <code>number</code> |  |  |
+| properties | <code>object</code> |  |  |
 | [properties.duration] | <code>number</code> | <code>0</code> | Active duration of the event |
 | [properties.preWait] | <code>number</code> | <code>0</code> | Time to wait before entering the active duration |
 | [properties.postWait] | <code>number</code> | <code>0</code> | Time to wait before finalising the event |
@@ -115,7 +122,7 @@ Get the latest time value associated with this event
 <a name="ParallelTimelineEvent"></a>
 
 ## ParallelTimelineEvent
-The ParallelTimelineEvent class allows you to group child events, where all events
+The ParallelTimelineEvent class allows you to group [PrimerEvent](#PrimerEvent)s, where all events
 run in parallel, and the group itself has a duration equal to the longest duration of
 all the children
 
@@ -133,12 +140,12 @@ all the children
 | Param | Type |
 | --- | --- |
 | name | <code>string</code> | 
-| events | [<code>TimelineEvent</code>](#TimelineEvent) \| [<code>ParallelTimelineEvent</code>](#ParallelTimelineEvent) | 
+| events | [<code>Array.&lt;PrimerEvent&gt;</code>](#PrimerEvent) | 
 
 <a name="ParallelTimelineEvent+get"></a>
 
 ### parallelTimelineEvent.get(event)
-Get a named TimelineEvent object in this group
+Get a named [PrimerEvent](#PrimerEvent) object in this group
 
 **Kind**: instance method of [<code>ParallelTimelineEvent</code>](#ParallelTimelineEvent)  
 
@@ -155,25 +162,25 @@ Returns a linear representation for the longest event in the group
 <a name="timeline"></a>
 
 ## timeline(events) ⇒ [<code>Timeline</code>](#Timeline)
-Factory function for the {@Link Timeline} constructor
+Factory function for the [Timeline](#Timeline) constructor
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| events | [<code>TimelineEvent</code>](#TimelineEvent) \| [<code>ParallelTimelineEvent</code>](#ParallelTimelineEvent) | 
+| events | [<code>Array.&lt;PrimerEvent&gt;</code>](#PrimerEvent) | 
 
 <a name="timelineEvent"></a>
 
 ## timelineEvent(name, properties) ⇒ [<code>TimelineEvent</code>](#TimelineEvent)
-Factory function for the {@Link TimelineEvent} constructor
+Factory function for the [TimelineEvent](#TimelineEvent) constructor
 
 **Kind**: global function  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | name | <code>string</code> |  | Name of this event (used in [get](#Timeline+get)) |
-| properties | <code>number</code> |  |  |
+| properties | <code>object</code> |  |  |
 | [properties.duration] | <code>number</code> | <code>0</code> | Active duration of the event |
 | [properties.preWait] | <code>number</code> | <code>0</code> | Time to wait before entering the active duration |
 | [properties.postWait] | <code>number</code> | <code>0</code> | Time to wait before finalising the event |
@@ -182,12 +189,16 @@ Factory function for the {@Link TimelineEvent} constructor
 <a name="parallelTimelineEvent"></a>
 
 ## parallelTimelineEvent(name, events) ⇒ [<code>ParallelTimelineEvent</code>](#ParallelTimelineEvent)
-Factory function for the {@Link ParallelTimelineEvent} constructor
+Factory function for the [ParallelTimelineEvent](#ParallelTimelineEvent) constructor
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
 | name | <code>string</code> | 
-| events | [<code>TimelineEvent</code>](#TimelineEvent) \| [<code>ParallelTimelineEvent</code>](#ParallelTimelineEvent) | 
+| events | [<code>Array.&lt;PrimerEvent&gt;</code>](#PrimerEvent) | 
 
+<a name="PrimerEvent"></a>
+
+## PrimerEvent : [<code>TimelineEvent</code>](#TimelineEvent) \| [<code>ParallelTimelineEvent</code>](#ParallelTimelineEvent)
+**Kind**: global typedef  
